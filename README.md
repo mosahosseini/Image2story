@@ -1,2 +1,3 @@
 # Image2story
- This app takes an image as input an outputs a story about that picture.
+This app will turn your image into an audio story. 
+
