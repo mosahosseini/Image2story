@@ -1,13 +1,12 @@
-from dotenv import find_dotenv, load_dotenv
-
-from transformers import pipeline
-from PIL import Image
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
-from langchain_community.llms import GPT4All
+import os
 
 import streamlit as st
-import os
+from PIL import Image
+from dotenv import find_dotenv, load_dotenv
+from langchain.chains import LLMChain
+from langchain.prompts import PromptTemplate
+from langchain_community.llms import GPT4All
+from transformers import pipeline
 
 load_dotenv(find_dotenv())
 HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
@@ -41,6 +40,7 @@ def text_to_story(senario):
     response = chain.invoke(senario)
     return response
 
+
 def TTS(message):
     API_URL = "https://api-inference.huggingface.co/models/espnet/kan-bayashi_ljspeech_vits"
     headers = {"Authorization": f"Bearer {HUGGINGFACEHUB_API_TOKEN}"}
@@ -58,6 +58,7 @@ def TTS(message):
 
 if __name__ == "__main__":
     st.title("🦜🔗 Image to Story")
+
     # uploaded_file = st.camera_input()
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"], accept_multiple_files=False)
 
