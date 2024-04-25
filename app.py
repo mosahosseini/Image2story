@@ -51,10 +51,10 @@ def TTS(message):
                 }
     response = requests.post(API_URL, headers=headers, json=payloads)
 
-    with open("test.flac", "wb") as file:
+    with open("audio.flac", "wb") as file:
         file.write(response.content)
 
-    with open("test.flac", "rb") as file:
+    with open("audio.flac", "rb") as file:
         audio = file.read()
         st.audio(audio, format="audio/flac")
 
@@ -66,14 +66,9 @@ def TTS(message):
 
 if __name__ == "__main__":
     st.title("🦜🔗 Image to Story")
-    #uploaded_file = st.camera_input()
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"], accept_multiple_files=False)
-        # If an image is uploaded
     if uploaded_file is not None:
-        #image_bytes = uploaded_file.getvalue()
         img = Image.open(uploaded_file)
-        # Display the image
-
         st.image(uploaded_file, caption='Uploaded Image.', use_column_width=True)
         text = img2text(img)
         story = text_to_story(text[0]["generated_text"])
