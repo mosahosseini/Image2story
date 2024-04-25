@@ -9,9 +9,8 @@ from langchain_community.llms import GPT4All
 import streamlit as st
 import os
 
-load_dotenv( find_dotenv())
-HUGGINGFACEHUB_API_TOKEN =os.getenv("HUGGINGFACEHUB_API_TOKEN")
-
+load_dotenv(find_dotenv())
+HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
 import requests
 
@@ -42,46 +41,30 @@ def text_to_story(senario):
     response = chain.invoke(senario)
     return response
 
-
 def TTS(message):
-
     API_URL = "https://api-inference.huggingface.co/models/espnet/kan-bayashi_ljspeech_vits"
     headers = {"Authorization": f"Bearer {HUGGINGFACEHUB_API_TOKEN}"}
     payloads = {"inputs": message
                 }
     response = requests.post(API_URL, headers=headers, json=payloads)
 
-    with open("test.flac", "wb") as file:
+    with open("audio.flac", "wb") as file:
         file.write(response.content)
 
-    with open("test.flac", "rb") as file:
+    with open("audio.flac", "rb") as file:
         audio = file.read()
         st.audio(audio, format="audio/flac")
 
 
-
-
-
-
-
 if __name__ == "__main__":
     st.title("🦜🔗 Image to Story")
-    #uploaded_file = st.camera_input()
+    # uploaded_file = st.camera_input()
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"], accept_multiple_files=False)
-        # If an image is uploaded
-    if uploaded_file is not None:
-        #image_bytes = uploaded_file.getvalue()
-        img = Image.open(uploaded_file)
-        # Display the image
 
+    if uploaded_file is not None:
+        img = Image.open(uploaded_file)
         st.image(uploaded_file, caption='Uploaded Image.', use_column_width=True)
         text = img2text(img)
         story = text_to_story(text[0]["generated_text"])
         st.write(story["text"])
         TTS(story["text"])
-
-
-
-
-
-
