@@ -17,7 +17,7 @@ HUGGINGFACEHUB_API_TOKEN =os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
 import requests
 
-PATH = r'C:\Users\sasyn\.cache\mistral-7b-instruct-v0.1.Q4_0.gguf'
+PATH = r'mistral-7b-instruct-v0.1.Q4_0.gguf'
 
 
 def img2text(img):
