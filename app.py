@@ -13,8 +13,6 @@ load_dotenv( find_dotenv())
 HUGGINGFACEHUB_API_TOKEN =os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
 
-#HUGGINGFACEHUB_API_TOKEN ="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"
-
 import requests
 
 PATH = r'mistral-7b-instruct-v0.1.Q4_0.gguf'
@@ -63,20 +61,6 @@ def TTS(message):
 
 
 
-# def process_image(image):
-#     image = Image.fromarray(image)
-#     scenario = img2text(image)
-#     scenario = scenario[0]["generated_text"]
-#
-#     story = generate_story(scenario)
-#     TTS(story)
-#
-#     audio = "audio.flac"
-#     text = story
-#     TTS(text)
-#
-#     return text, audio
-
 
 
 
@@ -98,26 +82,6 @@ if __name__ == "__main__":
 
 
 
-# if __name__ == "__main__":
-#     st.title("🦜🔗 gpt for yall")
-#     message = "Once upon a time, in a land far away, there were two brave knights named Sir Cedric and Sir Galahad. They both wore shining armor from head to toe and wielded their swords with great skill and precision. The two had been best friends since childhood and often engaged in friendly sword fights just for fun. But one day, a terrible dragon attacked the kingdom and the two knights were called upon to defend it. With their swords drawn, Sir Cedric and Sir Galahad rode out to face the beast together. Despite being vastly outnumbered, the two fought bravely and with honor, never giving an inch. In the end, they managed to defeat the dragon and save the kingdom. From that day on, the two knights were hailed as heroes and their friendship became legendary throughout the land."
-#
-#     HUGGINGFACEHUB_API_TOKEN = "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"
-#
-#     text = st.write(message + "\n" + HUGGINGFACEHUB_API_TOKEN)
-#
-#     API_URL = "https://api-inference.huggingface.co/models/espnet/kan-bayashi_ljspeech_vits"
-#     headers = {"Authorization": f"Bearer {HUGGINGFACEHUB_API_TOKEN}"}
-#     payloads = {"inputs": message
-#                 }
-#     response = requests.post(API_URL, headers=headers, json=payloads)
-#
-#     with open("test.flac", "wb") as file:
-#         file.write(response.content)
-#
-#     with open("test.flac", "rb") as file:
-#         audio = file.read()
-#         st.audio(audio, format="audio/flac")
 
 
 
